@@ -8,9 +8,9 @@ export default function AdminAvatar() {
   return (
     <Link
       href='/dashboard/account'
-      className='flex items-center gap-4 p-2 bg-green-50 rounded-lg'
+      className='flex items-center gap-4 p-2 bg-orange-50 rounded-lg'
     >
-      <div className='h-12 w-12 bg-green-900 rounded-full flex items-center justify-center'>
+      <div className='h-12 w-12 bg-orange-900 rounded-full flex items-center justify-center'>
         <span className='text-xl font-bold text-white'>
           {initials[0][0]} {initials[1][0]}
         </span>

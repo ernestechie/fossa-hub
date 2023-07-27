@@ -7,7 +7,7 @@ export default function Greeting() {
         <p className='text-3xl font-bold mb-2'>Good morning, Ernest ⛅</p>
         <p className=''>Check out your dashboard summary</p>
       </div>
-      <button className='text-green-500 font-medium'>View analytics</button>
+      <button className='text-orange-600 font-medium'>View analytics</button>
     </div>
   );
 }

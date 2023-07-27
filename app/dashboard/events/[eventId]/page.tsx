@@ -1,10 +1,12 @@
+import { IEvent } from '@/models/events';
+import { events } from '@/schema';
 import React from 'react';
 
-const EventDetailsPage = () => {
+const EventDetailsPage = ({ params }: { params: { eventId: string } }) => {
   return (
-    <section className='p-4 sm:p-8 md:p-16'>
-      <p>Event Details</p>
-    </section>
+    <div>
+      <p>Overview</p>
+    </div>
   );
 };
 

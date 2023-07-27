@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'www.propertypro.ng',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
     ],
   },
 };

@@ -17,7 +17,6 @@ type SidebarProps = {
 
 export default function Sidebar({ isOpen, setOpen, setClose }: SidebarProps) {
   const pathname = usePathname();
-  const path = pathname.split('/');
 
   return (
     <div
@@ -38,7 +37,7 @@ export default function Sidebar({ isOpen, setOpen, setClose }: SidebarProps) {
       </button>
       <div className='p-4 mt-4 mb-16 flex items-center justify-center'>
         <div
-          className={`bg-green-700 rounded-md duration-500 ${
+          className={`bg-orange-700 rounded-md duration-500 ${
             isOpen ? 'h-14 w-14' : 'h-12 w-12'
           }`}
         ></div>
@@ -57,14 +56,14 @@ export default function Sidebar({ isOpen, setOpen, setClose }: SidebarProps) {
             {isOpen && (
               <div
                 className={`w-1 h-10 duration-300 ${
-                  pathname === link.page ? 'bg-green-700' : 'white'
+                  pathname.trim() === link.page ? 'bg-orange-700' : 'white'
                 }`}
               />
             )}
             <div
               className={`py-4 flex gap-4 w-full h-10 items-center duration-300 ${
-                pathname === link.page
-                  ? 'bg-green-50 text-green-700'
+                pathname.trim() === link.page
+                  ? 'bg-orange-50 text-orange-700'
                   : 'white text-gray-500'
               } ${isOpen ? 'justify-start pl-6' : 'justify-center pl-0'}`}
             >
