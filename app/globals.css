@@ -63,10 +63,10 @@ button:focus:not(:active)::after {
   }
 
   .details-nav {
-    @apply mx-auto rounded-2xl border-[1px] border-gray-200 p-2 flex items-center gap-4 shadow-sm shadow-green-50;
+    @apply mx-auto rounded-xl border-[1px] border-gray-200 p-2 flex items-center gap-4 shadow-sm shadow-green-50;
   }
 
   .details-nav-link {
-    @apply px-4 py-1.5 rounded-xl duration-300;
+    @apply px-4 py-1.5 rounded-lg duration-300;
   }
 }

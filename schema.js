@@ -23,6 +23,17 @@ export const events = [
     ticket_price: 5000, // Ticket price if the event is not free (optional)
     registration_deadline: new Date('08-10-23'), // ISO 8601 format (optional)
     registration_required: true, // Whether registration is required or not
+    tickets_sold: [
+      {
+        _id: 1,
+        number: 1,
+        tier: 'regular',
+        price: 5000,
+        buyer_name: 'isaiah ernest',
+        purchase_date: new Date('07-02-2023'),
+        verification_status: false,
+      },
+    ],
     ticket_tier: [
       {
         name: 'Regular',
@@ -86,6 +97,17 @@ export const events = [
     ticket_price: 5000, // Ticket price if the event is not free (optional)
     registration_deadline: new Date('09-17-23'), // ISO 8601 format (optional)
     registration_required: true, // Whether registration is required or not
+    tickets_sold: [
+      {
+        _id: 1,
+        number: 1,
+        tier: 'table for 4',
+        price: 15000,
+        buyer_name: 'george lucky',
+        purchase_date: new Date('07-27-2023'),
+        verification_status: false,
+      },
+    ],
     ticket_tier: [
       {
         name: 'Table For 4',

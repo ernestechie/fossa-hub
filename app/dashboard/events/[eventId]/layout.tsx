@@ -1,6 +1,5 @@
 import EventDetailsNav from '@/app/components/Events/EventDetails/Navigation';
-import { IEvent } from '@/models/events';
-import { events } from '@/schema';
+import { getEventById } from '@/libs/events';
 import React from 'react';
 
 const layout = ({
@@ -12,7 +11,7 @@ const layout = ({
 }) => {
   const currentId = params.eventId;
 
-  const thisEvent = events.find((event: IEvent) => event._id === currentId);
+  const thisEvent = getEventById(currentId);
 
   if (!thisEvent) {
     return (
@@ -25,7 +24,7 @@ const layout = ({
   return (
     <section className='p-4 sm:p-8 md:px-16'>
       <EventDetailsNav slug={params.eventId} />
-      <section className='pt-12'>{children}</section>
+      {thisEvent && <section className='pt-12'>{children}</section>}
     </section>
   );
 };
