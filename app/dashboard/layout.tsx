@@ -14,7 +14,7 @@ export default function DashboardLayout({
   const setClose = () => setSidebarOpen(false);
 
   return (
-    <div className='grid grid-cols-12'>
+    <div className='grid grid-cols-12 bg-gray-50'>
       <div
         className={`bg-white duration-500 transition-all border-r-[1px] border-r-gray-50  ${
           sidebarOpen

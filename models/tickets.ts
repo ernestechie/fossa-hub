@@ -1,4 +1,4 @@
-export interface ITickets {
+export interface ITicket {
   _id: string;
   number: string | number; // Generate by adding 1 to the length of the tickets array.
   tier: string;
