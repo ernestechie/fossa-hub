@@ -20,7 +20,9 @@ export default function Sidebar({ isOpen, setOpen, setClose }: SidebarProps) {
 
   return (
     <div
-      className={`fixed top-0 left-0 ${isOpen ? 'w-3/12 lg:w-2/12' : 'w-1/12'}`}
+      className={`fixed top-0 left-0 z-20 ${
+        isOpen ? 'w-3/12 lg:w-1/6' : 'w-1/12'
+      }`}
     >
       <button
         aria-label='Sidebar toggle Button'

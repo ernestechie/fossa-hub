@@ -8,7 +8,7 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [sidebarOpen, setSidebarOpen] = useState<Boolean>(true);
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
 
   const setOpen = () => setSidebarOpen(true);
   const setClose = () => setSidebarOpen(false);
@@ -25,11 +25,12 @@ export default function DashboardLayout({
         <Sidebar isOpen={sidebarOpen} setOpen={setOpen} setClose={setClose} />
       </div>
       <div
-        className={`duration-500 bg-white col-span-12 ${
+        className={`duration-500 bg-white col-span-12 py-24 ${
           sidebarOpen ? 'md:col-span-9 lg:col-span-10' : 'md:col-span-11'
         }`}
       >
-        <Navbar />
+        <Navbar isOpen={sidebarOpen} />
+
         {children}
       </div>
     </div>

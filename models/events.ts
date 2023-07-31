@@ -2,6 +2,7 @@ export interface IEvent {
   _id: string;
   title: string;
   description: string;
+  overview: string;
   image_url: string;
   start_date: Date;
   end_date: Date;
@@ -31,6 +32,7 @@ export interface IEvent {
     name: string;
     url: string;
   }[];
+  posted_by: { _id: string; name: string; role: string };
   created_at: Date;
   updated_at: Date;
 }
