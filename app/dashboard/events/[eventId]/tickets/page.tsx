@@ -10,14 +10,23 @@ const data = [
     tier: 'Regular',
     price: 5000,
     buyer_name: 'Lucky George',
-    purchase_date: new Date('10-20-23'),
+    purchase_date: new Date('07-22-23'),
     verification_status: false,
+  },
+  {
+    _id: '2',
+    number: 7,
+    tier: 'VVIP',
+    price: 12000,
+    buyer_name: 'Isaiah Ernest',
+    purchase_date: new Date('07-20-23'),
+    verification_status: true,
   },
 ];
 
 const columns = [
-  { label: 'Ticket ID', key: '_id' },
-  { label: 'Order NO', key: 'number' },
+  { label: 'Order ID', key: '_id' },
+  { label: 'Ticket NO', key: 'number' },
   { label: 'Ticket Tier', key: 'tier' },
   { label: 'Buyer Name', key: 'buyer_name' },
   { label: 'Purchase Date', key: 'purchase_date' },
@@ -62,7 +71,11 @@ const EventTickets = ({ params }: { params: { eventId: string } }) => {
                 {parseDate(row.purchase_date)}
               </td>
               <td className='py-2 px-4 border border-gray-300'>
-                {row.verification_status}
+                {row.verification_status ? (
+                  <span>Verified</span>
+                ) : (
+                  <span>Unverified</span>
+                )}
               </td>
             </tr>
           ))}
