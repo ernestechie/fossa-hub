@@ -2,11 +2,12 @@ import { parseDate } from '@/helpers/parseDate';
 import { getEventById } from '@/libs/events';
 import { ITicket } from '@/models/tickets';
 import React from 'react';
+import { SlOptionsVertical } from 'react-icons/sl';
 
 const data = [
   {
     _id: '1',
-    number: 30,
+    number: 3,
     tier: 'Regular',
     price: 5000,
     buyer_name: 'Lucky George',
@@ -19,7 +20,7 @@ const data = [
     tier: 'VVIP',
     price: 12000,
     buyer_name: 'Isaiah Ernest',
-    purchase_date: new Date('07-20-23'),
+    purchase_date: new Date('08-20-23'),
     verification_status: true,
   },
 ];
@@ -45,42 +46,54 @@ const EventTickets = ({ params }: { params: { eventId: string } }) => {
 
   return (
     <div className='container mx-auto p-4'>
-      <table className='table w-full border-collapse border border-gray-300'>
-        <thead>
-          <tr className='bg-gray-100'>
-            {columns.map((column) => (
-              <th
-                key={column.key}
-                className='py-2 px-4 border border-gray-300 text-left font-semibold'
-              >
-                {column.label}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((row: ITicket) => (
-            <tr key={row._id} className='hover:bg-gray-50'>
-              <td className='py-2 px-4 border border-gray-300'>{row._id}</td>
-              <td className='py-2 px-4 border border-gray-300'>{row.number}</td>
-              <td className='py-2 px-4 border border-gray-300'>{row.tier}</td>
-              <td className='py-2 px-4 border border-gray-300'>
-                {row.buyer_name}
-              </td>
-              <td className='py-2 px-4 border border-gray-300'>
-                {parseDate(row.purchase_date)}
-              </td>
-              <td className='py-2 px-4 border border-gray-300'>
-                {row.verification_status ? (
-                  <span>Verified</span>
-                ) : (
-                  <span>Unverified</span>
-                )}
-              </td>
+      <div className='rounded-xl border-[1px] border-gray-100'>
+        <table className='table w-full border-collapse'>
+          <thead>
+            <tr className='bg-gray-100'>
+              {columns.map((column) => (
+                <th
+                  key={column.key}
+                  className='p-4 text-left font-semibold border border-gray-200'
+                >
+                  {column.label}
+                </th>
+              ))}
+              <td></td>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {data.map((row: ITicket) => (
+              <tr
+                key={row._id}
+                className='hover:bg-gray-50 text-gray-800 border border-b-gray-100 rounded-xl'
+              >
+                <td className='p-4'>{row._id}</td>
+                <td className='p-4'>{row.number}</td>
+                <td className='p-4'>{row.tier}</td>
+                <td className='p-4'>{row.buyer_name}</td>
+                <td className='p-4'>{parseDate(row.purchase_date)}</td>
+                <td className='p-4'>
+                  {row.verification_status ? (
+                    <span className='px-6 py-2 bg-green-100 text-green-700 font-medium rounded-full'>
+                      Verified
+                    </span>
+                  ) : (
+                    <span className='px-6 py-2 bg-orange-100 text-orange-600 font-medium rounded-full'>
+                      Unverified
+                    </span>
+                  )}
+                </td>
+                <td className='py-2 px-4 text-gray-700'>
+                  <button type='button'>
+                    {''}
+                    <SlOptionsVertical />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
