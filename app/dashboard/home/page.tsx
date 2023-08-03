@@ -1,5 +1,5 @@
-import LineGraph from '../components/Dashboard/Chart/LineGraph';
-import Greeting from '../components/Dashboard/Greeting';
+import LineGraph from '../../components/Dashboard/Chart/LineGraph';
+import Greeting from '../../components/Dashboard/Greeting';
 
 export default function Dashboard() {
   return (
@@ -10,7 +10,7 @@ export default function Dashboard() {
           <div
             key={el}
             className={`col-span-4 sm:col-span-2 lg:col-span-1 p-6 rounded-md border-[1px] border-gray-200 h-36 ${
-              el === 1 ? 'bg-green-600' : 'bg-white'
+              el === 1 ? 'bg-orange-700' : 'bg-white'
             }`}
           ></div>
         ))}

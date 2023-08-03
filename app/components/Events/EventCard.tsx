@@ -12,12 +12,12 @@ interface ComponentProps {
 const EventCard: React.FC<ComponentProps> = ({ event }) => {
   return (
     <div className='relative w-full max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden max-h-[512px]'>
-      <span className='absolute top-4 left-4 bg-green-600 py-1 px-6 rounded-full text-white font-semibold capitalize text-sm'>
+      <span className='absolute top-4 left-4 bg-orange-700 py-1 px-6 rounded-full text-white font-semibold capitalize text-sm'>
         {event.categories[0]}
       </span>
       <Link href={`/dashboard/events/${event._id}`}>
         <Image
-          className='w-full object-contain'
+          className='w-full h-44'
           src={event.image_url}
           alt={event.description}
           width={300}
@@ -43,7 +43,7 @@ const EventCard: React.FC<ComponentProps> = ({ event }) => {
         <div className='grid grid-cols-3'>
           <div className='p-4 col-span-1'>
             <p className='text-sm mb-1 text-gray-600'>Starting:</p>
-            <p className='font-bold text-2xl text-green-600 md:text-xl lg:text-2xl'>
+            <p className='font-bold text-2xl text-orange-700 md:text-xl lg:text-2xl'>
               {parseNigerianNaira(event.ticket_price)}
             </p>
           </div>
