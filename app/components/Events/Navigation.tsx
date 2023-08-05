@@ -35,16 +35,18 @@ const Navigation = () => {
           </li>
         ))}
       </ul>
-
-      <button
-        type="button"
-        className="btn bg-orange-700 text-gray-50 hover:bg-orange-800"
+      <Link
+        href={"/dashboard/events/createevent"}
+        className="flex justify-center space-x-1"
       >
-        <Link href={"/dashboard/events/createevent"} className="flex justify-center space-x-1">
+        <button
+          type="button"
+          className="btn bg-orange-700 text-gray-50 hover:bg-orange-800"
+        >
           <BsPlus className="text-xl" />
           <span>Create Event</span>
-        </Link>
-      </button>
+        </button>
+      </Link>
     </div>
   );
 };
