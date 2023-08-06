@@ -1,3 +1,4 @@
+import Button from '@/app/components/Button';
 import { parseNigerianNaira } from '@/helpers/parseCurrency';
 import { parseDate } from '@/helpers/parseDate';
 import { getEventById } from '@/libs/events';
@@ -44,7 +45,7 @@ const EventDetailsPage = ({ params }: { params: { eventId: string } }) => {
                   </p>
                 </div>
               </div>
-
+              <Button slug={params.eventId} />
               <div>
                 <p className='text-gray-500 mt-4'>Starting:</p>
 
@@ -56,12 +57,6 @@ const EventDetailsPage = ({ params }: { params: { eventId: string } }) => {
                     </p>
                   </div>
 
-                  <button
-                    type='button'
-                    className='font-semibold text-orange-600'
-                  >
-                    Change
-                  </button>
                 </div>
               </div>
             </div>
