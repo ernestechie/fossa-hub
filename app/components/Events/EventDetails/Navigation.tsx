@@ -7,7 +7,6 @@ import React from 'react';
 const links = [
   { name: 'overview', page: '' },
   { name: 'tickets', page: '/tickets' },
-  { name: 'verification', page: '/verification' },
   { name: 'settings', page: '/settings' },
 ];
 
@@ -15,7 +14,7 @@ const Navigation = ({ slug }: { slug: string }) => {
   const pathname = usePathname();
 
   return (
-    <div className='details-nav max-w-[430px]'>
+    <div className='details-nav max-w-[310px]'>
       {links.map((link) => (
         <Link
           key={link.name}
