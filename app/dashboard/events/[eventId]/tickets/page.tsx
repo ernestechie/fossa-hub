@@ -5,34 +5,35 @@ import React from "react";
 import PopupMenu from "@/app/components/Events/PopupMenu/PopUp";
 import TicketForm from "@/app/components/Events/TicketForm/TicketForm";
 
+
 const data = [
   {
-    _id: "1",
+    _id: '1',
     number: 3,
-    tier: "Regular",
+    tier: 'Regular',
     price: 5000,
-    buyer_name: "Lucky George",
-    purchase_date: new Date("07-22-23"),
+    buyer_name: 'Lucky George',
+    purchase_date: new Date('07-22-23'),
     verification_status: false,
   },
   {
-    _id: "2",
+    _id: '2',
     number: 7,
-    tier: "VVIP",
+    tier: 'VVIP',
     price: 12000,
-    buyer_name: "Isaiah Ernest",
-    purchase_date: new Date("08-20-23"),
+    buyer_name: 'Isaiah Ernest',
+    purchase_date: new Date('08-20-23'),
     verification_status: true,
   },
 ];
 
 const columns = [
-  { label: "Order ID", key: "_id" },
-  { label: "Ticket NO", key: "number" },
-  { label: "Ticket Tier", key: "tier" },
-  { label: "Buyer Name", key: "buyer_name" },
-  { label: "Purchase Date", key: "purchase_date" },
-  { label: "Status", key: "verification_status" },
+  { label: 'Order ID', key: '_id' },
+  { label: 'Ticket NO', key: 'number' },
+  { label: 'Ticket Tier', key: 'tier' },
+  { label: 'Buyer Name', key: 'buyer_name' },
+  { label: 'Purchase Date', key: 'purchase_date' },
+  { label: 'Status', key: 'verification_status' },
 ];
 
 interface ColumnType {
@@ -93,7 +94,6 @@ const EventTickets = ({ params }: { params: { eventId: string } }) => {
               ))}
             </tbody>
           </table>
-        </div>
       </div>
     </>
   );
