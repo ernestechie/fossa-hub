@@ -48,7 +48,7 @@ const EventTickets = ({ params }: { params: { eventId: string } }) => {
   return (
     <>
       <TicketForm />
-      <div className='container mx-auto p-4'>
+      <div className='mt-8 container mx-auto'>
         <div className='rounded-xl border-[1px] border-gray-100'>
           <table className='table w-full border-collapse'>
             <thead>
