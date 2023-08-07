@@ -45,7 +45,7 @@ const EventDetailsPage = ({ params }: { params: { eventId: string } }) => {
                   </p>
                 </div>
               </div>
-              <Button slug={params.eventId} />
+
               <div>
                 <p className='text-gray-500 mt-4'>Starting:</p>
 
@@ -56,7 +56,7 @@ const EventDetailsPage = ({ params }: { params: { eventId: string } }) => {
                       {parseDate(currentEvent.start_date)}
                     </p>
                   </div>
-
+                  <Button slug={params.eventId} />
                 </div>
               </div>
             </div>
