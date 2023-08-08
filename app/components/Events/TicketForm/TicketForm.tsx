@@ -1,6 +1,4 @@
 'use client';
-import { parseDate } from '@/helpers/parseDate';
-import { ITicket } from '@/models/tickets';
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 
 const TicketForm = () => {
