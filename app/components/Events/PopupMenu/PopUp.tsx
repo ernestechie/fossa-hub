@@ -8,7 +8,6 @@ const PopupMenu = () => {
     <Popup
       trigger={
         <button type='button'>
-          {''}
           <SlOptionsVertical />
         </button>
       }
