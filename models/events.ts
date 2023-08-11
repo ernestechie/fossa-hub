@@ -36,3 +36,17 @@ export interface IEvent {
   created_at: Date;
   updated_at: Date;
 }
+
+export interface IEventFormData {
+  image: string;
+  title: string;
+  description: string;
+  price: number;
+  eventType: string;
+  venue_name: string;
+  address: string;
+  city: string;
+  state: string;
+  country: string;
+  postal_code: string | number;
+}
