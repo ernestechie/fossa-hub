@@ -1,22 +1,9 @@
 'use client';
+import { IEventFormData } from '@/models/events';
 import React, { useState } from 'react';
 
-interface EventFormData {
-  image: string;
-  title: string;
-  description: string;
-  price: number;
-  eventType: string;
-  venue_name: string;
-  address: string;
-  city: string;
-  state: string;
-  country: string;
-  postal_code: string | number;
-}
-
 const EventFormComponent: React.FC = () => {
-  const [formData, setFormData] = useState<EventFormData>({
+  const [formData, setFormData] = useState<IEventFormData>({
     image: '',
     title: '',
     description: '',
