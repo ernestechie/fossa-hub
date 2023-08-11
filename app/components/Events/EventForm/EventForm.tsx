@@ -1,20 +1,24 @@
 'use client';
-import { IEventFormData } from '@/models/events';
+import { parseDate } from '@/helpers/parseDate';
 import React, { useState } from 'react';
 
 const EventFormComponent: React.FC = () => {
-  const [formData, setFormData] = useState<IEventFormData>({
-    image: '',
+  const [formData, setFormData] = useState({
+    image_url: '',
     title: '',
     description: '',
-    price: 0,
-    eventType: '',
-    venue_name: '',
-    address: '',
-    city: '',
-    state: '',
-    country: '',
-    postal_code: '',
+    ticket_price: 0,
+    categories: [],
+    location: {
+      venue_name: '',
+      address: '',
+      city: '',
+      state: '',
+      country: '',
+      postal_code: '',
+    },
+    start_date: new Date(''),
+    end_date: new Date(''),
   });
 
   const handleChange = (
@@ -33,7 +37,7 @@ const EventFormComponent: React.FC = () => {
   // Event type is gotten from the "categories" property of the event object
   // Event type is dynamic, and should be a list of different categories
   // Check line 20 & 21 in schema.js in the root directory
-  const eventTypes: string[] = [
+  const categorieType: string[] = [
     'Conference',
     'Seminar',
     'Workshop',
@@ -56,14 +60,14 @@ const EventFormComponent: React.FC = () => {
         <select
           id='eventType'
           name='eventType'
-          value={formData.eventType}
+          value={formData.categories}
           onChange={handleChange}
           className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
         >
           <option value='' disabled>
             Select event type
           </option>
-          {eventTypes.map((type) => (
+          {categorieType.map((type) => (
             <option key={type} value={type}>
               {type}
             </option>
@@ -78,6 +82,7 @@ const EventFormComponent: React.FC = () => {
           type='file'
           id='image'
           name='image'
+          value={formData.image_url}
           onChange={handleChange}
           className='appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
         />
@@ -120,7 +125,7 @@ const EventFormComponent: React.FC = () => {
           type='number'
           id='price'
           name='price'
-          value={formData.price}
+          value={formData.ticket_price}
           onChange={handleChange}
           className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
           placeholder='Ticket Price'
@@ -137,10 +142,44 @@ const EventFormComponent: React.FC = () => {
           type='text'
           id='venue_name'
           name='venue_name'
-          value={formData.venue_name}
+          value={formData.location.venue_name}
           onChange={handleChange}
           className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
           placeholder='Venue Name'
+        />
+      </div>
+      <div className='mb-4'>
+        <label
+          htmlFor='venue_name'
+          className='block text-gray-700 font-bold mb-2'
+        >
+          Starting Date
+        </label>
+        <input
+          type='date'
+          id='start_date'
+          name='start_date'
+          value={parseDate(formData.start_date)}
+          onChange={handleChange}
+          className='appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
+          placeholder='Starting Date'
+        />
+      </div>
+      <div className='mb-4'>
+        <label
+          htmlFor='venue_name'
+          className='block text-gray-700 font-bold mb-2'
+        >
+          Ending Date
+        </label>
+        <input
+          type='date'
+          id='end_date'
+          name='end_date'
+          value={parseDate(formData.end_date)}
+          onChange={handleChange}
+          className='appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
+          placeholder='Ending Date'
         />
       </div>
       <div className='mb-4'>
@@ -151,7 +190,7 @@ const EventFormComponent: React.FC = () => {
           type='text'
           id='address'
           name='address'
-          value={formData.address}
+          value={formData.location.address}
           onChange={handleChange}
           className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
           placeholder='Address'
@@ -165,7 +204,7 @@ const EventFormComponent: React.FC = () => {
           type='text'
           id='city'
           name='city'
-          value={formData.city}
+          value={formData.location.city}
           onChange={handleChange}
           className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
           placeholder='City'
@@ -179,7 +218,7 @@ const EventFormComponent: React.FC = () => {
           type='text'
           id='state'
           name='state'
-          value={formData.state}
+          value={formData.location.state}
           onChange={handleChange}
           className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
           placeholder='State'
@@ -193,7 +232,7 @@ const EventFormComponent: React.FC = () => {
           type='text'
           id='country'
           name='country'
-          value={formData.country}
+          value={formData.location.country}
           onChange={handleChange}
           className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
           placeholder='Country'
@@ -210,7 +249,7 @@ const EventFormComponent: React.FC = () => {
           type='text'
           id='postal_code'
           name='postal_code'
-          value={formData.postal_code}
+          value={formData.location.postal_code}
           onChange={handleChange}
           className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
           placeholder='Postal Code'

@@ -1,11 +1,10 @@
-'use client';
-import { parseDate } from '@/helpers/parseDate';
-import { ITicket } from '@/models/tickets';
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+"use client";
+import React, { ChangeEvent, FormEvent, useState } from "react";
+import TicketPopup from "../PopupMenu/PopupTicket";
 
 const TicketForm = () => {
   const [formData, setFormData] = useState({
-    number: '',
+    number: "",
   });
 
   const handleChange = (
@@ -21,32 +20,27 @@ const TicketForm = () => {
   };
 
   return (
-    <div className='container mx-auto mt-8'>
-      <div className='p-6 border border-gray-100 rounded-lg'>
-        <p className='text-xl font-semibold mb-8'>Verify Ticket</p>
+    <div className="container mx-auto mt-8">
+      <div className="p-6 border border-gray-100 rounded-lg">
+        <p className="text-xl font-semibold mb-8">Verify Ticket</p>
         <form
           onSubmit={handleSubmit}
-          className='flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4'
+          className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4"
         >
-          <div className='w-full'>
-            <label className='block mb-2 font-bold'>Ticket Number:</label>
+          <div className="w-full">
+            <label className="block mb-2 font-bold">Ticket Number:</label>
             <input
-              title='Ticket Number'
-              type='text'
-              name='number'
+              title="Ticket Number"
+              type="text"
+              name="number"
               value={formData.number}
               onChange={handleChange}
-              className='w-full p-3 border rounded-md outline-none'
+              className="w-full p-3 border rounded-md outline-none"
               required
-              placeholder='Ticket Number'
+              placeholder="Ticket Number"
             />
           </div>
-          <button
-            type='submit'
-            className='block w-full bg-orange-600 text-white p-3 rounded-md hover:bg-orange-700 duration-500'
-          >
-            Submit
-          </button>
+           <TicketPopup />
         </form>
       </div>
     </div>
