@@ -20,13 +20,20 @@ const EventFormComponent: React.FC = () => {
     start_date: new Date(''),
     end_date: new Date(''),
   });
-
+const [ticketData, setTicketData] = useState({
+number: 0,
+buyer_name:"",
+price: 0,
+tier:"",
+verification_status: false
+})
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setTicketData({ ...ticketData, [e.target.name]: e.target.value })
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -126,6 +133,62 @@ const EventFormComponent: React.FC = () => {
           id='price'
           name='price'
           value={formData.ticket_price}
+          onChange={handleChange}
+          className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
+          placeholder='Ticket Price'
+        />
+      </div>
+      <div className='mb-4'>
+        <label htmlFor='price' className='block text-gray-700 font-bold mb-2'>
+          Ticket number
+        </label>
+        <input
+          type='number'
+          id='price'
+          name='price'
+          value={ticketData.number}
+          onChange={handleChange}
+          className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
+          placeholder='Ticket number'
+        />
+      </div>
+      <div className='mb-4'>
+        <label htmlFor='price' className='block text-gray-700 font-bold mb-2'>
+          Ticket tier
+        </label>
+        <input
+          type='text'
+          id='price'
+          name='price'
+          value={ticketData.tier}
+          onChange={handleChange}
+          className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
+          placeholder='Ticket tier '
+        />
+      </div>
+      <div className='mb-4'>
+        <label htmlFor='price' className='block text-gray-700 font-bold mb-2'>
+          Ticket tier price
+        </label>
+        <input
+          type='number'
+          id='price'
+          name='price'
+          value={ticketData.price}
+          onChange={handleChange}
+          className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
+          placeholder='Ticket tier price'
+        />
+      </div>
+      <div className='mb-4'>
+        <label htmlFor='price' className='block text-gray-700 font-bold mb-2'>
+          buyer name
+        </label>
+        <input
+          type='text'
+          id='price'
+          name='price'
+          value={ticketData.buyer_name}
           onChange={handleChange}
           className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
           placeholder='Ticket Price'
