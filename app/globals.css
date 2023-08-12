@@ -69,4 +69,8 @@ button:focus:not(:active)::after {
   .details-nav-link {
     @apply px-4 py-1.5 rounded-lg duration-300;
   }
+
+  .form-input {
+    @apply appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none;
+  }
 }

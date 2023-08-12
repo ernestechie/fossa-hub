@@ -20,20 +20,20 @@ const EventFormComponent: React.FC = () => {
     start_date: new Date(''),
     end_date: new Date(''),
   });
-const [ticketData, setTicketData] = useState({
-number: 0,
-buyer_name:"",
-price: 0,
-tier:"",
-verification_status: false
-})
+  const [ticketData, setTicketData] = useState({
+    number: 0,
+    buyer_name: '',
+    price: 0,
+    tier: '',
+    verification_status: false,
+  });
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setTicketData({ ...ticketData, [e.target.name]: e.target.value })
+    setTicketData({ ...ticketData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -69,7 +69,7 @@ verification_status: false
           name='eventType'
           value={formData.categories}
           onChange={handleChange}
-          className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
+          className='form-input'
         >
           <option value='' disabled>
             Select event type
@@ -91,7 +91,7 @@ verification_status: false
           name='image'
           value={formData.image_url}
           onChange={handleChange}
-          className='appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
+          className='form-input'
         />
       </div>
       <div className='mb-4'>
@@ -104,7 +104,7 @@ verification_status: false
           name='title'
           value={formData.title}
           onChange={handleChange}
-          className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
+          className='form-input'
           placeholder='Event Title'
         />
       </div>
@@ -120,35 +120,38 @@ verification_status: false
           name='description'
           value={formData.description}
           onChange={handleChange}
-          className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none  h-32 resize-none'
+          className='form-input  h-32 resize-none'
           placeholder='Event Description'
         />
       </div>
       <div className='mb-4'>
-        <label htmlFor='price' className='block text-gray-700 font-bold mb-2'>
+        <label
+          htmlFor='ticket_price'
+          className='block text-gray-700 font-bold mb-2'
+        >
           Ticket Price
         </label>
         <input
           type='number'
-          id='price'
-          name='price'
+          id='ticket_price'
+          name='ticket_price'
           value={formData.ticket_price}
           onChange={handleChange}
-          className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
+          className='form-input'
           placeholder='Ticket Price'
         />
       </div>
       <div className='mb-4'>
-        <label htmlFor='price' className='block text-gray-700 font-bold mb-2'>
+        <label htmlFor='number' className='block text-gray-700 font-bold mb-2'>
           Ticket number
         </label>
         <input
           type='number'
-          id='price'
-          name='price'
+          id='number'
+          name='number'
           value={ticketData.number}
           onChange={handleChange}
-          className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
+          className='form-input'
           placeholder='Ticket number'
         />
       </div>
@@ -158,11 +161,11 @@ verification_status: false
         </label>
         <input
           type='text'
-          id='price'
-          name='price'
+          id='tier'
+          name='tier'
           value={ticketData.tier}
           onChange={handleChange}
-          className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
+          className='form-input'
           placeholder='Ticket tier '
         />
       </div>
@@ -176,21 +179,24 @@ verification_status: false
           name='price'
           value={ticketData.price}
           onChange={handleChange}
-          className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
+          className='form-input'
           placeholder='Ticket tier price'
         />
       </div>
       <div className='mb-4'>
-        <label htmlFor='price' className='block text-gray-700 font-bold mb-2'>
+        <label
+          htmlFor='buyer_name'
+          className='block text-gray-700 font-bold mb-2'
+        >
           buyer name
         </label>
         <input
           type='text'
-          id='price'
-          name='price'
+          id='buyer_name'
+          name='buyer_name'
           value={ticketData.buyer_name}
           onChange={handleChange}
-          className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
+          className='form-input'
           placeholder='Ticket Price'
         />
       </div>
@@ -207,7 +213,7 @@ verification_status: false
           name='venue_name'
           value={formData.location.venue_name}
           onChange={handleChange}
-          className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
+          className='form-input'
           placeholder='Venue Name'
         />
       </div>
@@ -224,7 +230,7 @@ verification_status: false
           name='start_date'
           value={parseDate(formData.start_date)}
           onChange={handleChange}
-          className='appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
+          className='form-input'
           placeholder='Starting Date'
         />
       </div>
@@ -241,7 +247,7 @@ verification_status: false
           name='end_date'
           value={parseDate(formData.end_date)}
           onChange={handleChange}
-          className='appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
+          className='form-input'
           placeholder='Ending Date'
         />
       </div>
@@ -255,7 +261,7 @@ verification_status: false
           name='address'
           value={formData.location.address}
           onChange={handleChange}
-          className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
+          className='form-input'
           placeholder='Address'
         />
       </div>
@@ -269,7 +275,7 @@ verification_status: false
           name='city'
           value={formData.location.city}
           onChange={handleChange}
-          className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
+          className='form-input'
           placeholder='City'
         />
       </div>
@@ -283,7 +289,7 @@ verification_status: false
           name='state'
           value={formData.location.state}
           onChange={handleChange}
-          className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
+          className='form-input'
           placeholder='State'
         />
       </div>
@@ -297,7 +303,7 @@ verification_status: false
           name='country'
           value={formData.location.country}
           onChange={handleChange}
-          className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
+          className='form-input'
           placeholder='Country'
         />
       </div>
@@ -314,7 +320,7 @@ verification_status: false
           name='postal_code'
           value={formData.location.postal_code}
           onChange={handleChange}
-          className=' appearance-none border rounded-md w-full p-3 text-gray-700 leading-tight focus:outline-none'
+          className='form-input'
           placeholder='Postal Code'
         />
       </div>
