@@ -40,7 +40,7 @@ const TicketForm = () => {
               placeholder="Ticket Number"
             />
           </div>
-           <TicketPopup />
+          <TicketPopup />
         </form>
       </div>
     </div>
