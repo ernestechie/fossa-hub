@@ -36,26 +36,30 @@ export const events = [
         verification_status: false,
       },
     ],
-    ticket_tier: [
+    ticket_tiers: [
       {
+        _id: 1,
         name: 'Regular',
         price: 3500,
         description: 'Standard admission ticket',
         available_qty: 50,
       },
       {
+        _id: 2,
         name: 'VIP',
         price: 10000,
         description: 'VIP ticket with additional perks',
         available_qty: 30,
       },
       {
+        _id: 3,
         name: 'Table For 4',
         price: 30000,
         description: 'Reservation for a VIP table (group of 4)',
         available_qty: 10,
       },
       {
+        _id: 3,
         name: 'Table For 8',
         price: 70000,
         description: 'Reservation for a VVIP table (group of 8)',
@@ -113,14 +117,16 @@ export const events = [
         verification_status: false,
       },
     ],
-    ticket_tier: [
+    ticket_tiers: [
       {
+        _id: 1,
         name: 'Table For 4',
         price: 15000,
         description: 'Reservation for a table (group of 4)',
         available_qty: 40,
       },
       {
+        _id: 2,
         name: 'Table For 8',
         price: 35000,
         description: 'Reservation for a VIP table (group of 8)',

@@ -22,7 +22,8 @@ export interface IEvent {
   ticket_price: number;
   registration_required: boolean;
   registration_deadline: Date;
-  ticket_tier: {
+  ticket_tiers: {
+    _id: string | number;
     name: string;
     price: number;
     description: string;

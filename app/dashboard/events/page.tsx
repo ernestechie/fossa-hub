@@ -1,5 +1,4 @@
 import EventCard from '@/app/components/Events/EventCard';
-
 import Navigation from '@/app/components/Events/Navigation';
 import { events } from '../../../schema';
 
