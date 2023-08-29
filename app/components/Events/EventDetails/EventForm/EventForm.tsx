@@ -1,7 +1,6 @@
 'use client';
 import Modal from '@/app/components/Global/Modal';
-import { parseNigerianNaira } from '@/helpers/parseCurrency';
-import { parseDate } from '@/helpers/parseDate';
+import { IEvent } from '@/models/events';
 import { ITicketTier } from '@/models/tickets';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
@@ -10,7 +9,7 @@ import TicketTier from '../../TicketForm/TicketTier';
 
 const EventFormComponent: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<IEvent>({
     title: '',
     description: '',
     overview: '',
@@ -63,8 +62,8 @@ const EventFormComponent: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const posted_by = {
-      _id: 'ernestechie',
-      name: 'ernestechie',
+      _id: 'admin',
+      name: 'admin',
       role: 'super admin',
     };
 
@@ -74,9 +73,6 @@ const EventFormComponent: React.FC = () => {
     console.log(data);
   };
 
-  // Event type is gotten from the "categories" property of the event object
-  // Event type is dynamic, and should be a list of different categories
-  // Check line 20 & 21 in schema.js in the root directory
   const categorieType: string[] = [
     'Conference',
     'Seminar',
@@ -149,7 +145,7 @@ const EventFormComponent: React.FC = () => {
       const filteredTier = ticketTiers.filter((tier) => tier._id !== id);
 
       setTicketTiers(
-        [updatedTier, ...filteredTier].sort((a, b) => a._id - b._id)
+        [updatedTier, ...filteredTier].sort((a: any, b: any) => a._id - b._id)
       );
     } else {
       toast.error('Not found!');
