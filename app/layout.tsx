@@ -1,4 +1,5 @@
 import { JsxElement } from 'typescript';
+import ToastProvider from './components/Global/ToastProvider';
 import './globals.css';
 
 export const metadata = {
@@ -14,7 +15,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body>{children}</body>
+      <body>
+        <ToastProvider>{children}</ToastProvider>
+      </body>
     </html>
   );
 }

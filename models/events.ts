@@ -1,3 +1,5 @@
+import { ITicket, ITicketTier } from './tickets';
+
 export interface IEvent {
   _id: string;
   title: string;
@@ -22,13 +24,8 @@ export interface IEvent {
   ticket_price: number;
   registration_required: boolean;
   registration_deadline: Date;
-  ticket_tiers: {
-    _id: string | number;
-    name: string;
-    price: number;
-    description: string;
-    available_qty: number;
-  }[];
+  tickets_sold: ITicket[];
+  ticket_tiers: ITicketTier[];
   attachments: {
     name: string;
     url: string;

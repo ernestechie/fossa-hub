@@ -12,7 +12,7 @@ const Modal = (props: {
   return (
     <>
       {open && (
-        <div className='p-4 z-50 fixed top-0 left-0 h-full w-full backdrop-blur-sm bg-[rgba(0,0,0,0.5)] flex items-center justify-center duration-500'>
+        <div className='overlay p-4 z-50 fixed top-0 left-0 h-full w-full backdrop-blur-sm bg-[rgba(0,0,0,0.5)] flex items-center justify-center duration-500'>
           <div className='py-4 w-full max-w-lg rounded-md bg-white shadow-xl duration-500'>
             <div className='p-4 px-6 mb-4 border-b border-b-gray-100 flex items-center justify-between'>
               <p className='text-lg capitalize font-bold'>{heading}</p>

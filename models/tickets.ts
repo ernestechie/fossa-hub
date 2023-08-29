@@ -8,3 +8,11 @@ export interface ITicket {
   verification_status: boolean; // TRUE means the buyer has atttended the party, FALSE means otherwise.
   // If this returns true, the attendee won't be allowed to enter. This reduces the chances of fraud.
 }
+
+export interface ITicketTier {
+  _id: string;
+  name: string;
+  price: number;
+  description: string;
+  available_qty: number;
+}

@@ -2,16 +2,11 @@
 import Modal from '@/app/components/Global/Modal';
 import { parseNigerianNaira } from '@/helpers/parseCurrency';
 import { parseDate } from '@/helpers/parseDate';
+import { ITicketTier } from '@/models/tickets';
 import React, { useState } from 'react';
-import { AiFillDelete, AiOutlinePlus } from 'react-icons/ai';
-
-interface ITicketTier {
-  _id: string | number;
-  name: string;
-  price: number;
-  description: string;
-  available_qty: number;
-}
+import { toast } from 'react-hot-toast';
+import { AiOutlinePlus } from 'react-icons/ai';
+import TicketTier from '../../TicketForm/TicketTier';
 
 const EventFormComponent: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -41,22 +36,7 @@ const EventFormComponent: React.FC = () => {
     attachments: [],
   });
 
-  const [ticketTiers, setTicketTiers] = useState<ITicketTier[]>([
-    {
-      _id: 1,
-      name: 'Regular',
-      price: 3500,
-      description: 'Standard admission ticket',
-      available_qty: 50,
-    },
-    {
-      _id: 2,
-      name: 'VIP',
-      price: 10000,
-      description: 'VIP ticket with additional perks',
-      available_qty: 30,
-    },
-  ]);
+  const [ticketTiers, setTicketTiers] = useState<ITicketTier[]>([]);
 
   const [tierFormData, setTierFormData] = useState({
     tier_name: '',
@@ -88,10 +68,10 @@ const EventFormComponent: React.FC = () => {
       role: 'super admin',
     };
 
-    const data = { ...formData, posted_by };
+    const data = { ...formData, posted_by, ticket_tiers: ticketTiers };
 
     e.preventDefault();
-    // console.log(data);
+    console.log(data);
   };
 
   // Event type is gotten from the "categories" property of the event object
@@ -117,30 +97,63 @@ const EventFormComponent: React.FC = () => {
     price: number,
     qty: number
   ) => {
-    const new_tier = {
-      _id: ticketTiers.length + 1,
-      name,
-      price,
-      description: desc,
-      available_qty: qty,
-    };
+    const validDetails =
+      name.trim().length > 0 && desc.trim().length > 0 && price > 0 && qty > 0;
 
-    setTicketTiers([...ticketTiers, new_tier]);
+    if (validDetails) {
+      const new_tier = {
+        _id: (ticketTiers.length + 1).toString(),
+        name,
+        price,
+        description: desc,
+        available_qty: qty,
+      };
 
-    setTierFormData({
-      tier_name: '',
-      tier_price: '',
-      tier_description: '',
-      available_quantity: '',
-    });
+      setTicketTiers([...ticketTiers, new_tier]);
+
+      setTierFormData({
+        tier_name: '',
+        tier_price: '',
+        tier_description: '',
+        available_quantity: '',
+      });
+
+      toast.success('New tier created successfully');
+    } else {
+      toast.error('Please provide valid details');
+    }
   };
 
-  const handleDeleteTicketTier = (_id: string | number) => {
+  const handleDeleteTicketTier = (_id: string) => {
     const updated_tiers = ticketTiers.filter(
       (el: ITicketTier) => el._id !== _id
     );
 
     setTicketTiers(updated_tiers);
+  };
+
+  const handleEditTicketTier = (
+    id: string | number,
+    key: string,
+    value: string | number
+  ) => {
+    const indexToUpdate = ticketTiers.findIndex((tier) => tier._id === id);
+    const tierToUpdate = ticketTiers[indexToUpdate];
+
+    if (tierToUpdate) {
+      const updatedTier = {
+        ...tierToUpdate,
+        [key]: value,
+      };
+
+      const filteredTier = ticketTiers.filter((tier) => tier._id !== id);
+
+      setTicketTiers(
+        [updatedTier, ...filteredTier].sort((a, b) => a._id - b._id)
+      );
+    } else {
+      toast.error('Not found!');
+    }
   };
 
   return (
@@ -150,94 +163,100 @@ const EventFormComponent: React.FC = () => {
         open={modalOpen}
         closeModal={handleModalClose}
       >
-        <div className='grid grid-cols-2 gap-4'>
-          <div className='mb-4 col-span-1'>
-            <label
-              htmlFor='tier_name'
-              className='block text-gray-700 font-bold mb-2 text-lg'
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            createNewTicketTier(
+              tierFormData.tier_name,
+              tierFormData.tier_description,
+              parseInt(tierFormData.tier_price),
+              parseInt(tierFormData.available_quantity)
+            );
+          }}
+        >
+          <div className='grid grid-cols-2 gap-4'>
+            <div className='mb-4 col-span-1'>
+              <label
+                htmlFor='tier_name'
+                className='block text-gray-700 font-bold mb-2 text-lg'
+              >
+                Name
+              </label>
+              <input
+                type='text'
+                id='tier_name'
+                name='tier_name'
+                value={tierFormData.tier_name}
+                onChange={handleTierFormChange}
+                className='form-input'
+                placeholder='Tier Name'
+              />
+            </div>
+            <div className='mb-4 col-span-1'>
+              <label
+                htmlFor='tier_description'
+                className='block text-gray-700 font-bold mb-2 text-lg'
+              >
+                Description
+              </label>
+              <input
+                type='text'
+                id='tier_description'
+                name='tier_description'
+                value={tierFormData.tier_description}
+                onChange={handleTierFormChange}
+                className='form-input'
+                placeholder='Tier Description'
+              />
+            </div>
+            <div className='mb-4 col-span-1'>
+              <label
+                htmlFor='tier_price'
+                className='block text-gray-700 font-bold mb-2 text-lg'
+              >
+                Price
+              </label>
+              <input
+                type='number'
+                id='tier_price'
+                name='tier_price'
+                value={tierFormData.tier_price}
+                onChange={handleTierFormChange}
+                className='form-input'
+                placeholder='Tier Price'
+              />
+            </div>
+            <div className='mb-4 col-span-1'>
+              <label
+                htmlFor='available_quantity'
+                className='block text-gray-700 font-bold mb-2 text-lg'
+              >
+                Available Quantity
+              </label>
+              <input
+                type='number'
+                id='available_quantity'
+                name='available_quantity'
+                value={tierFormData.available_quantity}
+                onChange={handleTierFormChange}
+                className='form-input'
+                placeholder='Available Quantity'
+              />
+            </div>
+            <div></div>
+            <button
+              type='submit'
+              className='bg-gray-700 hover:bg-gray-800 text-white font-bold py-3 px-4 rounded-md focus:outline-none block w-full'
             >
-              Name
-            </label>
-            <input
-              type='text'
-              id='tier_name'
-              name='tier_name'
-              value={tierFormData.tier_name}
-              onChange={handleTierFormChange}
-              className='form-input'
-              placeholder='Tier Name'
-            />
+              Add
+            </button>
           </div>
-          <div className='mb-4 col-span-1'>
-            <label
-              htmlFor='tier_description'
-              className='block text-gray-700 font-bold mb-2 text-lg'
-            >
-              Description
-            </label>
-            <input
-              type='text'
-              id='tier_description'
-              name='tier_description'
-              value={tierFormData.tier_description}
-              onChange={handleTierFormChange}
-              className='form-input'
-              placeholder='Tier Description'
-            />
-          </div>
-          <div className='mb-4 col-span-1'>
-            <label
-              htmlFor='tier_price'
-              className='block text-gray-700 font-bold mb-2 text-lg'
-            >
-              Price
-            </label>
-            <input
-              type='number'
-              id='tier_price'
-              name='tier_price'
-              value={tierFormData.tier_price}
-              onChange={handleTierFormChange}
-              className='form-input'
-              placeholder='Tier Price'
-            />
-          </div>
-          <div className='mb-4 col-span-1'>
-            <label
-              htmlFor='available_quantity'
-              className='block text-gray-700 font-bold mb-2 text-lg'
-            >
-              Available Quantity
-            </label>
-            <input
-              type='number'
-              id='available_quantity'
-              name='available_quantity'
-              value={tierFormData.available_quantity}
-              onChange={handleTierFormChange}
-              className='form-input'
-              placeholder='Available Quantity'
-            />
-          </div>
-
-          <div></div>
-          <button
-            type='submit'
-            className='bg-gray-700 hover:bg-gray-800 text-white font-bold py-3 px-4 rounded-md focus:outline-none block w-full'
-            onClick={() =>
-              createNewTicketTier(
-                tierFormData.tier_name,
-                tierFormData.tier_description,
-                parseInt(tierFormData.tier_price),
-                parseInt(tierFormData.available_quantity)
-              )
-            }
-          >
-            Add
-          </button>
-        </div>
+        </form>
       </Modal>
-      <form className='my-12 w-full max-w-lg mx-auto' onSubmit={handleSubmit}>
+      <form
+        className='p-4 my-12 w-full max-w-lg mx-auto'
+        onSubmit={handleSubmit}
+      >
         <section className='my-12'>
           <p className='text-gray-700 mb-4 font-bold uppercase'>Overview</p>
           <div className='mb-4'>
@@ -251,7 +270,16 @@ const EventFormComponent: React.FC = () => {
               id='eventType'
               name='eventType'
               value={formData.categories[0] ?? ''}
-              onChange={handleChange}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                const categories = [
+                  ...formData.categories,
+                  e.target.value.trim(),
+                ];
+
+                setFormData({ ...formData, categories });
+
+                console.log(e.target.value);
+              }}
               className='form-input'
             >
               <option value='' disabled>
@@ -510,7 +538,7 @@ const EventFormComponent: React.FC = () => {
                 Ticket Tiers
               </p>
               <button
-                type='submit'
+                type='button'
                 title='Add new ticket tier'
                 className='bg-gray-700 hover:bg-gray-800 text-white py-2 px-4 rounded-md focus:outline-none font-bold flex items-center gap-2'
                 onClick={handleModalOpen}
@@ -528,55 +556,18 @@ const EventFormComponent: React.FC = () => {
               ))}
 
             {ticketTiers.length > 0 && (
-              <div>
-                <div className='my-8 grid grid-cols-6 gap-4'>
-                  <p className='col-span-2'>Tier Name</p>
-                  <p className='col-span-2'>Price</p>
-                  <p className='col-span-1'>Qty</p>
-                  <p className='col-span-1'></p>
-                </div>
+              <>
                 {ticketTiers.map((el: ITicketTier) => (
-                  <div key={el._id} className='my-2 grid grid-cols-6 gap-4'>
-                    <input
-                      type='text'
-                      id={el.name}
-                      name={el.name}
-                      value={el.name}
-                      onChange={() => {}}
-                      className='form-input capitalize col-span-2'
-                      placeholder={el.name}
-                    />
-
-                    <input
-                      type='number'
-                      id={el.price.toString()}
-                      name={el.price.toString()}
-                      value={el.price}
-                      onChange={() => {}}
-                      className='form-input capitalize col-span-2'
-                      placeholder={el.price.toString()}
-                    />
-
-                    <input
-                      type='number'
-                      id={el.available_qty.toString()}
-                      name={el.available_qty.toString()}
-                      value={el.available_qty}
-                      onChange={() => {}}
-                      className='form-input capitalize col-span-1'
-                      placeholder={el.available_qty.toString()}
-                    />
-                    <button
-                      type='button'
-                      title='Delete ticket tier'
-                      className='col-span-1 text-red-700'
-                      onClick={() => handleDeleteTicketTier(el._id)}
-                    >
-                      <AiFillDelete />
-                    </button>
-                  </div>
+                  <TicketTier
+                    key={el._id}
+                    tier={el}
+                    onDelete={(id: string) => handleDeleteTicketTier(id)}
+                    onEdit={(id, key, value) =>
+                      handleEditTicketTier(id, key, value)
+                    }
+                  />
                 ))}
-              </div>
+              </>
             )}
           </div>
         </section>
@@ -584,7 +575,7 @@ const EventFormComponent: React.FC = () => {
         <div className='flex items-center justify-center'>
           <button
             type='submit'
-            className='bg-orange-700 hover:bg-orange-800 text-white font-bold py-3 px-4 rounded-md focus:outline-none block w-full'
+            className='bg-orange-700 hover:bg-orange-800 text-white font-bold py-3 px-4 rounded-md focus:outline-none block w-full duration-500'
           >
             Submit
           </button>
