@@ -1,5 +1,7 @@
+import { ITicket, ITicketTier } from './tickets';
+
 export interface IEvent {
-  _id: string;
+  readonly _id?: string;
   title: string;
   description: string;
   overview: string;
@@ -17,24 +19,20 @@ export interface IEvent {
   categories: string[];
   tags: string[];
   capacity: number;
-  attendees: string[];
+  attendees?: string[];
   is_free: boolean;
   ticket_price: number;
   registration_required: boolean;
   registration_deadline: Date;
-  ticket_tier: {
-    name: string;
-    price: number;
-    description: string;
-    available_qty: number;
-  }[];
+  tickets_sold?: ITicket[];
+  ticket_tiers: ITicketTier[];
   attachments: {
     name: string;
     url: string;
   }[];
-  posted_by: { _id: string; name: string; role: string };
-  created_at: Date;
-  updated_at: Date;
+  posted_by?: { _id: string; name: string; role: string };
+  created_at?: Date;
+  updated_at?: Date;
 }
 
 export interface IEventFormData {
