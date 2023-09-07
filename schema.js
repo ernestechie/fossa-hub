@@ -59,7 +59,7 @@ export const events = [
         available_qty: 10,
       },
       {
-        _id: '3',
+        _id: '4',
         name: 'Table For 8',
         price: 70000,
         description: 'Reservation for a VVIP table (group of 8)',

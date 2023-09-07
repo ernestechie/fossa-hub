@@ -1,6 +1,6 @@
 export const parseDate = (date: Date) => {
   return `${new Date(date).toLocaleDateString('default', {
-    month: 'long',
+    month: 'short',
   })} ${new Date(date).getDate()}, ${new Date(date).getUTCFullYear()}`;
 };
 

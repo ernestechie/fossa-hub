@@ -3,11 +3,13 @@ import { AiFillCheckCircle, AiFillDelete } from 'react-icons/ai';
 import { SlOptionsVertical } from 'react-icons/sl';
 import { Popup } from 'reactjs-popup';
 
-const PopupMenu = () => {
+const PopupMenu = (props: { verified: boolean }) => {
+  const { verified } = props;
+
   return (
     <Popup
       trigger={
-        <button type='button'>
+        <button type='button' title='Ticket options'>
           <SlOptionsVertical />
         </button>
       }
@@ -19,18 +21,16 @@ const PopupMenu = () => {
       contentStyle={{ padding: '0px', border: 'none' }}
       arrow={false}
     >
-      <div className="flex flex-col w-[110px] h-16 border-2 bg-white px-3  text-slate-500 space-y-1 rounded-md relative right-[50px] top-5 justify-center items-start border-gray-100">
-        <button className="flex flex-row items-center">
-          <span className="mr-2 text-base">
+      <div className='w-[120px] bg-white text-gray-600 rounded-md relative right-[50px] top-4 justify-center items-start border-gray-100 shadow-sm border border-gray-100'>
+        {!verified && (
+          <button className='w-full flex items-center border-b border-gray-100 px-4 py-2 gap-4'>
             <AiFillCheckCircle />
-          </span>
-          <span className="text-base">Validate</span>
-        </button>
-        <button className="flex flex-row items-center">
-          <span className="mr-2 text-base">
-            <AiFillDelete />
-          </span>
-          <span className="text-base">Delete</span>
+            <span className='text-base'>Validate</span>
+          </button>
+        )}
+        <button className='w-full flex items-center px-4 py-2 gap-4'>
+          <AiFillDelete />
+          <span className='text-base'>Delete</span>
         </button>
       </div>
     </Popup>

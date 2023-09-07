@@ -2,6 +2,7 @@ import Button from '@/app/components/Button';
 import { parseNigerianNaira } from '@/helpers/parseCurrency';
 import { parseDate } from '@/helpers/parseDate';
 import { getEventById } from '@/libs/events';
+import { IEvent } from '@/models/events';
 import React from 'react';
 import { IoCalendarSharp } from 'react-icons/io5';
 import { MdLocationPin } from 'react-icons/md';
@@ -9,11 +10,11 @@ import { MdLocationPin } from 'react-icons/md';
 const EventDetailsPage = ({ params }: { params: { eventId: string } }) => {
   const currentId = params.eventId;
 
-  const currentEvent = getEventById(currentId);
+  const currentEvent: IEvent | undefined = getEventById(currentId);
 
   return (
     <>
-      {currentEvent && (
+      {currentEvent !== undefined && (
         <section>
           <section className='grid grid-cols-5 gap-4 mb-12'>
             <div className='bg-white shadow-sm rounded-xl p-6 w-full border-[1px] border-gray-100 col-span-5 lg:col-span-2 xl:col-span-2 min-h-96'>
@@ -38,10 +39,7 @@ const EventDetailsPage = ({ params }: { params: { eventId: string } }) => {
                 <div>
                   <p className='text-gray-500 mb-2'>Tickets Sold:</p>
                   <p className='text-yellow-700 font-bold text-3xl'>
-                    {(
-                      Math.floor(currentEvent.ticket_price / 30) *
-                      currentEvent.tickets_sold.length
-                    ).toLocaleString()}
+                    {currentEvent?.tickets_sold?.length.toLocaleString()}
                   </p>
                 </div>
               </div>
@@ -78,16 +76,16 @@ const EventDetailsPage = ({ params }: { params: { eventId: string } }) => {
             <div className='flex items-center gap-4 p-2 bg-orange-50 rounded-lg'>
               <div className='h-12 w-12 bg-orange-900 rounded-full flex items-center justify-center'>
                 <span className='text-xl font-bold text-white capitalize'>
-                  {currentEvent.posted_by.name.split(' ')[0][0]}
-                  {currentEvent.posted_by.name.split(' ')[1][0]}
+                  {currentEvent?.posted_by?.name.split(' ')[0][0]}
+                  {currentEvent?.posted_by?.name.split(' ')[1][0]}
                 </span>
               </div>
               <div>
                 <p className='leading-3 text-lg font-bold text-gray-800'>
-                  {currentEvent.posted_by.name}
+                  {currentEvent?.posted_by?.name}
                 </p>
                 <p className='text-gray-500 capitalize'>
-                  {currentEvent.posted_by.role}
+                  {currentEvent?.posted_by?.role}
                 </p>
               </div>
             </div>
