@@ -1,4 +1,5 @@
 'use client';
+
 import Modal from '@/app/components/Global/Modal';
 import { IEvent } from '@/models/events';
 import { ITicketTier } from '@/models/tickets';
@@ -52,6 +53,10 @@ const EventFormComponent: React.FC = () => {
     setTierFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const validateForm = () => {
+    return false;
+  };
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -61,16 +66,25 @@ const EventFormComponent: React.FC = () => {
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    const posted_by = {
-      _id: 'admin',
-      name: 'admin',
-      role: 'super admin',
-    };
-
-    const data = { ...formData, posted_by, ticket_tiers: ticketTiers };
-
     e.preventDefault();
-    console.log(data);
+
+    const detailsAreValid = validateForm();
+
+    if (detailsAreValid) {
+      const posted_by = {
+        _id: 'admin',
+        name: 'admin',
+        role: 'super admin',
+      };
+
+      const data = { ...formData, posted_by, ticket_tiers: ticketTiers };
+
+      console.log(data);
+    } else {
+      console.log('Please provide valid details');
+
+      toast.error('Please input valid details.');
+    }
   };
 
   const categorieType: string[] = [
@@ -249,10 +263,7 @@ const EventFormComponent: React.FC = () => {
           </div>
         </form>
       </Modal>
-      <form
-        className='p-4 my-12 w-full max-w-lg mx-auto'
-        onSubmit={handleSubmit}
-      >
+      <form className='p-4 my-8 w-full mx-auto' onSubmit={handleSubmit}>
         <section className='my-12'>
           <p className='text-gray-700 mb-4 font-bold uppercase'>Overview</p>
           <div className='mb-4'>

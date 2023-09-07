@@ -1,16 +1,63 @@
 'use client';
 import { ITicketTier } from '@/models/tickets';
+import { events } from '@/schema';
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { PiPlusCircle } from 'react-icons/pi';
 import Modal from '../../Global/Modal';
+
+interface INewTicket {
+  number: number | string;
+  tier: string;
+  buyer_name: string;
+}
 
 const RegisterTicket = (props: { tiers: ITicketTier[] | undefined }) => {
   const { tiers } = props;
 
   const [isOpen, setIsOpen] = useState(false);
+  const [newTicket, setNewTicket] = useState<INewTicket>({
+    number: '',
+    tier: '',
+    buyer_name: '',
+  });
+
+  const { tier, number, buyer_name } = newTicket;
 
   const handleModalOpen = () => setIsOpen(true);
   const handleModalClose = () => setIsOpen(false);
+
+  const registerNewTicketHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const newTicketTierPrice = tiers?.find(
+      (thisTier) => thisTier.name.toLowerCase() === tier.toLowerCase()
+    );
+
+    if (newTicketTierPrice) {
+      const ticket_to_add = {
+        ...newTicket,
+        price: newTicketTierPrice['price'],
+        purchase_date: new Date(),
+        verification_status: false,
+      };
+
+      console.log(ticket_to_add);
+
+      toast.success('New ticket successfully registered.');
+    } else {
+      toast.error('Ticket tier does not exist');
+    }
+  };
+
+  const formInputHandler = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setNewTicket((prev) => ({
+      ...prev,
+      [e.target.id]: e.target.value,
+    }));
+  };
 
   return (
     <>
@@ -19,7 +66,25 @@ const RegisterTicket = (props: { tiers: ITicketTier[] | undefined }) => {
         open={isOpen}
         closeModal={handleModalClose}
       >
-        <form>
+        <form onSubmit={registerNewTicketHandler}>
+          <div className='mb-4'>
+            <label
+              htmlFor='ticket_number'
+              className='block text-gray-700 font-bold mb-2 text-lg'
+            >
+              Buyer Name
+            </label>
+            <input
+              type='text'
+              id='buyer_name'
+              name='buyer_name'
+              value={buyer_name}
+              onChange={formInputHandler}
+              className='form-input'
+              placeholder='Buyer Name'
+              required
+            />
+          </div>
           <div className='mb-4'>
             <label
               htmlFor='ticket_number'
@@ -29,10 +94,10 @@ const RegisterTicket = (props: { tiers: ITicketTier[] | undefined }) => {
             </label>
             <input
               type='text'
-              id='ticket_number'
-              name='ticket_number'
-              value={''}
-              onChange={() => {}}
+              id='number'
+              name='number'
+              value={number}
+              onChange={formInputHandler}
               className='form-input'
               placeholder='Ticket Number'
               required
@@ -43,13 +108,14 @@ const RegisterTicket = (props: { tiers: ITicketTier[] | undefined }) => {
               htmlFor='eventType'
               className='block text-gray-700 font-bold mb-2 text-lg'
             >
-              Type of Event
+              Ticket Tier
             </label>
             <select
-              id='eventType'
-              name='eventType'
-              value={''}
-              onChange={() => {}}
+              title='Ticket Tier'
+              id='tier'
+              name='tier'
+              value={tier}
+              onChange={formInputHandler}
               className='form-input'
               required
             >
